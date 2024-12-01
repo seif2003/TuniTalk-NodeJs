@@ -34,8 +34,20 @@ Example request body:
 }
 ```
 
+#### Login
+```http
+POST http://localhost:3000/auth/login
+```
+
+Example request body:
+```json
+{
+    "email": "email@exemple.com",
+    "password": "password123"
+}
+```
+
 ### How this project is setup
-## Creating the project
 
 1. `npm init -y`
    - Initializes a new Node.js project with default settings. The `-y` flag automatically answers "yes" to all prompts, creating a `package.json` file with default values.

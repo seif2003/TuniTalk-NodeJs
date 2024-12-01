@@ -18,9 +18,6 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const SALTED_ROUNDS = 10;
 const JWT_SECRET = process.env.JWT_SECRET || 'change_this_secret';
 const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    // 1. get the username, email, password
-    // 2. Insert those data into the database
-    // 3. Return message, user
     const { username, email, password } = req.body;
     try {
         const hashedPassword = yield bcrypt_1.default.hash(password, SALTED_ROUNDS);
@@ -29,6 +26,7 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(201).json({ message: 'User registered successfully', user });
     }
     catch (error) {
+        console.error('Error during user registration:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });

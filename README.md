@@ -1,3 +1,42 @@
+# TuniTalk
+
+## Getting Started
+
+### Prerequisites
+
+- Docker
+- Docker Compose
+
+### Running the Project
+
+To run this project, execute the following command in your terminal:
+
+```bash
+docker-compose up --build
+```
+
+This command will build and start all the necessary containers for the project.
+
+### APIs
+The API endpoints are available at:
+
+#### Register
+```http
+POST http://localhost:3000/auth/register
+```
+
+Example request body:
+```json
+{
+    "username": "test",
+    "email": "email@exemple.com",
+    "password": "password123"
+}
+```
+
+### How this project is setup
+## Creating the project
+
 1. `npm init -y`
    - Initializes a new Node.js project with default settings. The `-y` flag automatically answers "yes" to all prompts, creating a `package.json` file with default values.
 
@@ -19,80 +58,3 @@
 
 4. `npm install nodemon`
    - Installs `nodemon`, a tool that automatically restarts the Node.js application when file changes in the directory are detected.
-
-5. Create a `.gitignore` file to exclude unnecessary files and directories from being tracked by Git. Add the following content to the `.gitignore` file:
-
-    ```
-    # Node.js
-    node_modules/
-    npm-debug.log*
-    yarn-debug.log*
-    yarn-error.log*
-
-    # TypeScript
-    *.tsbuildinfo
-
-    # Logs
-    logs
-    *.log
-    npm-debug.log*
-    yarn-debug.log*
-    yarn-error.log*
-
-    # Environment variables
-    .env
-
-    # IDEs and editors
-    .idea/
-    .vscode/
-    *.suo
-    *.ntvs*
-    *.njsproj
-    *.sln
-    *.sw?
-
-    # MacOS
-    .DS_Store
-
-    # Miscellaneous
-    .cache
-    .parcel-cache
-    ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

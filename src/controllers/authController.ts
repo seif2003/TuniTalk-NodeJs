@@ -12,7 +12,7 @@ export const register = async (req: Request, res: Response) => {
         const hashedPassword = await bcrypt.hash(password, SALTED_ROUNDS);
         const result = await pool.query('INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *', [username, email, hashedPassword]);
         const user = result.rows[0];
-        res.status(201).json({message: 'User registered successfully', user});
+        res.status(201).json({user});
     } catch (error) {
         console.error('Error during user registration:', error);
         res.status(500).json({error: 'Internal server error'});

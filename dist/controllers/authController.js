@@ -24,7 +24,7 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const hashedPassword = yield bcrypt_1.default.hash(password, SALTED_ROUNDS);
         const result = yield db_1.default.query('INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *', [username, email, hashedPassword]);
         const user = result.rows[0];
-        res.status(201).json({ message: 'User registered successfully', user });
+        res.status(201).json({ user });
     }
     catch (error) {
         console.error('Error during user registration:', error);

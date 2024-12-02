@@ -48,7 +48,8 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
         const token = jsonwebtoken_1.default.sign({ id: user.id }, JWT_SECRET, { expiresIn: '10h' });
-        res.json({ message: 'User logged in successfully', token });
+        let finalResult = Object.assign(Object.assign({}, user), { token });
+        res.json({ user: finalResult });
     }
     catch (error) {
         console.error('Error during user login:', error);

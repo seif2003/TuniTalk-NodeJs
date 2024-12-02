@@ -20,6 +20,9 @@ const SALTED_ROUNDS = 10;
 const JWT_SECRET = process.env.JWT_SECRET || 'change_this_secret';
 const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, email, password } = req.body;
+    console.log(username);
+    console.log(email);
+    console.log(password);
     try {
         const hashedPassword = yield bcrypt_1.default.hash(password, SALTED_ROUNDS);
         const result = yield db_1.default.query('INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *', [username, email, hashedPassword]);

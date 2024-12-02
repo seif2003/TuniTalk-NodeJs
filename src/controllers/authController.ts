@@ -8,6 +8,9 @@ const JWT_SECRET = process.env.JWT_SECRET || 'change_this_secret';
 
 export const register = async (req: Request, res: Response) => {
     const {username, email, password} = req.body;
+    console.log(username);
+    console.log(email);
+    console.log(password);
     try {
         const hashedPassword = await bcrypt.hash(password, SALTED_ROUNDS);
         const result = await pool.query('INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *', [username, email, hashedPassword]);
@@ -32,7 +35,8 @@ export const login = async (req: Request, res: Response): Promise<any> => {
             return res.status(401).json({error: 'Invalid credentials'});
         }
         const token = jwt.sign({id: user.id}, JWT_SECRET, {expiresIn: '10h'});
-        res.json({message: 'User logged in successfully', token});
+        let finalResult = {...user, token}
+        res.json({user : finalResult})
     } catch (error) {
         console.error('Error during user login:', error);
         res.status(500).json({error: 'Internal server error'});

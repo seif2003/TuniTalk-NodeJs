@@ -3,6 +3,7 @@ import {json} from 'body-parser';
 import authRoutes from './routes/authRoutes';
 import conversationsRoutes from './routes/conversationsRoutes';
 import messagesRoutes from './routes/messagesRoutes';
+import contactsRoutes from './routes/contactsRoutes';
 import http from 'http';
 import { Server } from 'socket.io';
 import { saveMessage } from './controllers/messagesController';
@@ -19,6 +20,7 @@ const io = new Server(server, {
 app.use('/auth', authRoutes);
 app.use('/conversations', conversationsRoutes);
 app.use('/messages', messagesRoutes);
+app.use('/contacts',contactsRoutes);
 
 io.on('connection', (socket) => {
     console.log('A user connected', socket.id);
@@ -36,6 +38,13 @@ io.on('connection', (socket) => {
             console.log('Message saved:');
             console.log(savedMessage);
             io.to(conversationId).emit('newMessage', savedMessage);
+
+            io.emit('conversationUpdated', {
+                conversationId,
+                lastMessage: savedMessage.content,
+                lastMessageTime: savedMessage.created_at,
+            });
+
         } catch (error) {
             console.error('Error saving message:', error);
         }

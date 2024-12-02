@@ -17,6 +17,7 @@ const body_parser_1 = require("body-parser");
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
 const conversationsRoutes_1 = __importDefault(require("./routes/conversationsRoutes"));
 const messagesRoutes_1 = __importDefault(require("./routes/messagesRoutes"));
+const contactsRoutes_1 = __importDefault(require("./routes/contactsRoutes"));
 const http_1 = __importDefault(require("http"));
 const socket_io_1 = require("socket.io");
 const messagesController_1 = require("./controllers/messagesController");
@@ -31,6 +32,7 @@ const io = new socket_io_1.Server(server, {
 app.use('/auth', authRoutes_1.default);
 app.use('/conversations', conversationsRoutes_1.default);
 app.use('/messages', messagesRoutes_1.default);
+app.use('/contacts', contactsRoutes_1.default);
 io.on('connection', (socket) => {
     console.log('A user connected', socket.id);
     socket.on('joinConversation', (conversationId) => {
@@ -44,6 +46,11 @@ io.on('connection', (socket) => {
             console.log('Message saved:');
             console.log(savedMessage);
             io.to(conversationId).emit('newMessage', savedMessage);
+            io.emit('conversationUpdated', {
+                conversationId,
+                lastMessage: savedMessage.content,
+                lastMessageTime: savedMessage.created_at,
+            });
         }
         catch (error) {
             console.error('Error saving message:', error);

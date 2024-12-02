@@ -28,6 +28,15 @@ CREATE TABLE IF NOT EXISTS messages (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Create a contacts table
+CREATE TABLE IF NOT EXISTS contacts (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    contact_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(user_id, contact_id)
+);
+
 
 -- Create first user
 INSERT INTO users (id,username, email, password) VALUES ('dc0b8612-b354-494d-bc8c-c5103625dd8e','user1', 'user1@exemple.com', '$2b$10$U2zc8heT6Tu0OcPGSwC6h.vNVcFPaO0247yM3ETlROaIZ6dhvlWQm');

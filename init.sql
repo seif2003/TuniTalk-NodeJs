@@ -44,6 +44,9 @@ INSERT INTO users (id,username, email, password) VALUES ('dc0b8612-b354-494d-bc8
 -- Create second user
 INSERT INTO users (id,username, email, password) VALUES ('563f5a40-d29b-43d7-a5fd-d8aeda885c73','user2', 'user2@exemple.com', '$2b$10$U2zc8heT6Tu0OcPGSwC6h.vNVcFPaO0247yM3ETlROaIZ6dhvlWQm');
 
+-- Create second user
+INSERT INTO users (id,username, email, password) VALUES ('463f5a40-d29b-43d7-a5fd-d8aeda885c74','user3', 'user3@exemple.com', '$2b$10$U2zc8heT6Tu0OcPGSwC6h.vNVcFPaO0247yM3ETlROaIZ6dhvlWQm');
+
 -- Create a conversation between two users
 INSERT INTO conversations (id,participant_one, participant_two) VALUES ('e3eb8f0e-9430-4491-92d9-65b1fdb532b8','dc0b8612-b354-494d-bc8c-c5103625dd8e', '563f5a40-d29b-43d7-a5fd-d8aeda885c73');
 

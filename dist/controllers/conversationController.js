@@ -51,6 +51,7 @@ const fetchAllConversationsByUserId = (req, res) => __awaiter(void 0, void 0, vo
 });
 exports.fetchAllConversationsByUserId = fetchAllConversationsByUserId;
 const checkOrCreateConversation = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log('checkOrCreateConversation');
     let userId = null;
     if (req.user) {
         userId = req.user.id;
@@ -65,6 +66,7 @@ const checkOrCreateConversation = (req, res) => __awaiter(void 0, void 0, void 0
             `, [userId, contactId]);
         if (existingConversation.rowCount != null && existingConversation.rowCount > 0) {
             res.json({ conversationId: existingConversation.rows[0].id });
+            return;
         }
         const newConversation = yield db_1.default.query(`
             INSERT INTO conversations (participant_one, participant_two)

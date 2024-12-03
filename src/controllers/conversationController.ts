@@ -42,6 +42,7 @@ export const fetchAllConversationsByUserId = async (req: Request, res: Response)
 }
 
 export const checkOrCreateConversation = async (req: Request, res: Response): Promise<any> => {
+    console.log('checkOrCreateConversation');
     let userId = null;
     if (req.user) {
         userId = req.user.id;
@@ -60,6 +61,7 @@ export const checkOrCreateConversation = async (req: Request, res: Response): Pr
 
         if (existingConversation.rowCount != null && existingConversation.rowCount! > 0) {
            res.json({ conversationId: existingConversation.rows[0].id });
+           return;
         }
 
         const newConversation = await pool.query(
